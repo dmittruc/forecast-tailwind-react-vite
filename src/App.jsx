@@ -1,13 +1,13 @@
 /** @format */
-
+import AppNavigation from './components/AppNavigation';
+import { BrowserRouter } from 'react-router';
 import './App.css';
 
 function App() {
   return (
-    <>
-      <h1 className="w-4">Hello world!</h1>
-      <h1 className="w-4">Hello world!</h1>
-    </>
+    <BrowserRouter>
+      <AppNavigation />
+    </BrowserRouter>
   );
 }
 
