@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import SearchCity from '../../components/SearchCity';
-import CustomButton from '../../components/CustonButton';
-import useForecast from '../../hooks/useForecast';
-import ForecastList from '../../components/forecastList';
+import { useState } from 'react';
 import { addRecentCity, getRecentCities } from '../../utils/recentCities';
+import ForecastList from '@components/ForecastList';
+import useForecast from '@/hooks/useForecast';
+import SearchCity from '@components/SearchCity';
+import CustomButton from '@components/CustonButton';
 
 const MainPage = () => {
   const [city, setCity] = useState<string>('');
