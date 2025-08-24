@@ -2,12 +2,16 @@
 import AppNavigation from './components/AppNavigation';
 import { BrowserRouter } from 'react-router';
 import './App.css';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppNavigation />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <AppNavigation />
+      </BrowserRouter>
+    </Provider>
   );
 }
 
