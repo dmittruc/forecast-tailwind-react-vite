@@ -16,7 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    // 🚀 Вот эти две опции нужны для алиасов
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],

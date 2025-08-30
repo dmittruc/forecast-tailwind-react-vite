@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TAppDispatch, TRootState } from '../store/store';
 import { fetchForecastAsyncAction } from '../store/forecastThunks';
 import { useCallback } from 'react';
-import { IForecast } from '../interfaces/IForecast';
+import { IForecastDay } from '../interfaces/IForecast';
 
 const useForecast = () => {
   const dispatch = useDispatch<TAppDispatch>();
@@ -11,7 +11,7 @@ const useForecast = () => {
     dispatch(fetchForecastAsyncAction(city));
   }, []);
 
-  const forecast = useSelector<TRootState, IForecast>(
+  const forecast = useSelector<TRootState, IForecastDay | null>(
     (state: TRootState) => state.forecast.forecast,
   );
 

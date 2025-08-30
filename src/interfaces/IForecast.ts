@@ -33,10 +33,25 @@ export interface IForecast {
   };
 }
 
-export interface IForecastDay {
+export interface IForecastDay1 {
   temp: number;
   tempMin: number;
   tempMax: number;
   description: string;
   city?: string;
+}
+
+export interface IForecastDay {
+  name: string;
+  main: {
+    temp: string;
+    temp_min: string;
+    temp_max: string;
+  };
+  weather: [
+    {
+      main: string;
+      description: string;
+    },
+  ];
 }

@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { IForecast } from '../interfaces/IForecast';
+import { IForecastDay } from '../interfaces/IForecast';
 
 interface forecastState {
-  forecast: IForecast | null;
+  forecast: IForecastDay | null;
   loading: boolean;
   error: string | null;
 }
@@ -22,7 +22,7 @@ export const forecastSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    getForecastSuccess: (state, action: PayloadAction<IForecast>) => {
+    getForecastSuccess: (state, action: PayloadAction<IForecastDay>) => {
       state.loading = false;
       state.forecast = action.payload;
       state.error = null;

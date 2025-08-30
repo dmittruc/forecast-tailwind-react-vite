@@ -1,16 +1,15 @@
 interface IProps {
-  name: string;
   onClick: () => void;
   loading?: boolean;
+  className?: string;
+  children: any;
 }
 
-const CustomButton = ({ name, onClick, loading }: IProps) => {
+const CustomButton = ({ children, onClick, loading, className }: IProps) => {
   return (
-    <div>
-      <button onClick={onClick} disabled={loading}>
-        {name}
-      </button>
-    </div>
+    <button onClick={onClick} disabled={loading} className={`${className}`}>
+      {children}
+    </button>
   );
 };
 
