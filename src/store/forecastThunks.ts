@@ -1,18 +1,14 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getForecastByCity } from '../api/forecastApi';
-import {
-  getForecast,
-  getForecastError,
-  getForecastSuccess,
-} from './forecastSlise';
-import { TAppDispatch } from './store';
 
-export const fetchForecastAsyncAction =
-  (city: string) => async (dispatch: TAppDispatch) => {
-    try {
-      dispatch(getForecast());
-      const res = await getForecastByCity(city);
-      dispatch(getForecastSuccess(res));
-    } catch (e: any) {
-      dispatch(getForecastError(e));
-    }
-  };
+import { TAppDispatch } from './store';
+import { IForecastDay } from '@/interfaces/IForecast';
+
+export const fetchForecastAsyncAction = createAsyncThunk<IForecastDay, string>(
+  'forecast/fetchForecastAsyncAction',
+
+  async (city: string) => {
+    const res = await getForecastByCity(city);
+    return res as IForecastDay;
+  },
+);

@@ -32,7 +32,7 @@ body {
   min-height: 100vh;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  background: linear-gradient(0deg, #032355, #0d2d95);
+  background: #feffd2;
 }
 
 h1 {

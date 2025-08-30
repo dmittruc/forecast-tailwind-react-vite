@@ -1,26 +1,36 @@
 import { useEffect, useState } from 'react';
-import { addRecentCity, getRecentCities } from '../../utils/recentCities';
-import ForecastList from '@components/ForecastList';
+import { addRecentCity, getRecentCity } from '../../utils/recentCities';
+import ForecastCard from '@components/ForecastCard';
 import useForecast from '@/hooks/useForecast';
 import SearchCity from '@components/SearchCity';
 import CustomButton from '@components/CustonButton';
+import { useDispatch } from 'react-redux';
+import { TAppDispatch } from '@/store/store';
+import { setForecastFromCache } from '@/store/forecastSliсe';
 
 const MainPage = () => {
   const [city, setCity] = useState<string>('');
-  const [recentCities, setRecentCities] = useState<string[]>(getRecentCities());
+  const dispatch = useDispatch<TAppDispatch>();
 
   const { searchCity, forecast, loading, error } = useForecast();
 
-  useEffect(() => {
-    console.log(forecast);
-  }, [forecast]);
+  useEffect(() => {}, [forecast]);
 
-  const handleSearch = (newCity: string) => {
-    if (!newCity) return;
-    searchCity(newCity);
-    addRecentCity(newCity);
-    setRecentCities(getRecentCities());
+  const handleSearch = (city: string) => {
+    if (!city.trim()) return;
+    const cached = getRecentCity(city);
+    if (cached) {
+      dispatch(setForecastFromCache(cached));
+      return;
+    }
+    searchCity(city);
   };
+
+  useEffect(() => {
+    if (forecast) {
+      addRecentCity(city, forecast);
+    }
+  }, [forecast]);
 
   return (
     <div className="flex flex-col">
@@ -36,17 +46,8 @@ const MainPage = () => {
       </div>
 
       {forecast && (
-        <ForecastList forecast={forecast} loading={loading} error={error} />
+        <ForecastCard forecast={forecast} loading={loading} error={error} />
       )}
-      <div>
-        {recentCities.map((c) => (
-          <CustomButton
-            children={c}
-            onClick={() => handleSearch(c)}
-            className="text-xl m-4 bg-yellow-300 text-blue-600"
-          />
-        ))}
-      </div>
     </div>
   );
 };
